@@ -403,30 +403,10 @@ app.get('*', (req, res) => {
 
 // Rota para processar o formulário de login
 app.post('/index', (req, res) => {
-    const { username, email } = req.body;
-
-    console.log('Dados recebidos:', username, email);
-
-    // Consultar o banco de dados para encontrar o usuário
-    const query = 'SELECT * FROM users WHERE username = ? OR email = ?';
-    db.get(query, [username, email], (err, row) => {
-        if (err) {
-            console.error('Erro ao autenticar usuário:', err);
-            return res.status(500).send('Erro ao autenticar usuário');
-        }
-        if (!row) {
-            console.log('Usuário não encontrado');
-            return res.status(401).send('Credenciais inválidas');
-        }
-
-        console.log('Usuário encontrado:', row);
-
-       // Rota para processar o formulário de login
-app.post('/index', (req, res) => {
     const { username, email, password } = req.body;
 
     // Verificar se o usuário e a senha correspondem ao usuário weslley.filadelfo
-    if (username === 'weslley.filadelfo' && email === 'weslleyafiladelfo@gmail.com' && password === 'weslleyafiladelfo@gmail.com') {
+    if (username === 'weslley.filadelfo' && email === 'weslleyafiladelfo@gmail.com' && password === 'sua_senha_aqui') {
         // Armazenar as informações de autenticação na sessão
         req.session.authenticated = true;
         req.session.username = username;
@@ -441,6 +421,7 @@ app.post('/index', (req, res) => {
         return res.status(401).send('Credenciais inválidas');
     }
 });
+
 
 // Rota para servir a página de menu (menu.html)
 app.get('/menu', (req, res) => {
