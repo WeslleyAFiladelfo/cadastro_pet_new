@@ -8,7 +8,9 @@ const { sendNotificationEmail } = require('./emailSender');
 const app = express();
 const port = 3000;
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'ejs'); // Definir o mecanismo de visualização como EJS
+app.set('views', path.join(__dirname, 'views')); // Definir o diretório de visualizações
+
 
 // Configuração da sessão com variável de ambiente
 const secretKey = process.env.SESSION_SECRET || 'sua_chave_secreta_aqui';
@@ -222,7 +224,7 @@ app.get('/continuar_cadastro', (req, res) => {
             return res.status(404).send('Produto pendente não encontrado');
         }
 
-          // Reconstruir o objeto tipo_atendimento
+        // Reconstruir o objeto tipo_atendimento
         const tipoAtendimento = JSON.parse(row.tipo_atendimento);
 
         // Renderizar a página 'continuar_cadastro.ejs' com os dados preenchidos
@@ -251,7 +253,7 @@ app.get('/continuar_cadastro', (req, res) => {
             valor: row.valor,
             repasse: row.repasse,
             tipo_atendimento: tipoAtendimento, // Passar o objeto reconstruído
-            observacao: row.observacao 
+            observacao: row.observacao
         });
     });
 });
@@ -403,25 +405,41 @@ app.get('*', (req, res) => {
 
 // Rota para processar o formulário de login
 app.post('/index', (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email } = req.body;
 
-    // Verificar se o usuário e a senha correspondem ao usuário weslley.filadelfo
-    if (username === 'weslley.filadelfo' && email === 'weslleyafiladelfo@gmail.com' && password === 'weslleyafiladelfo@gmail.com') {
-        // Armazenar as informações de autenticação na sessão
-        req.session.authenticated = true;
-        req.session.username = username;
-        req.session.email = email;
+    console.log('Dados recebidos:', username, email);
 
-        console.log('Autenticado com sucesso!');
-        // Redirecionar para o menu
-        return res.redirect('/menu');
-    } else {
-        // Credenciais inválidas
-        console.log('Credenciais inválidas');
-        return res.status(401).send('Credenciais inválidas');
-    }
+    // Consultar o banco de dados para encontrar o usuário
+    const query = 'SELECT * FROM users WHERE username = ? OR email = ?';
+    db.get(query, [username, email], (err, row) => {
+        if (err) {
+            console.error('Erro ao autenticar usuário:', err);
+            return res.status(500).send('Erro ao autenticar usuário');
+        }
+        if (!row) {
+            console.log('Usuário não encontrado');
+            return res.status(401).send('Credenciais inválidas');
+        }
+
+        console.log('Usuário encontrado:', row);
+
+        // Verifica se as credenciais correspondem
+        if (username === row.username && email === row.email) {
+            // Armazenar as informações de autenticação na sessão
+            req.session.authenticated = true;
+            req.session.username = username;
+            req.session.email = row.email;
+
+            console.log('Autenticado com sucesso!');
+            // Redirecionar para o menu
+            return res.redirect('/menu');
+        } else {
+            // Credenciais inválidas
+            console.log('Credenciais inválidas');
+            return res.status(401).send('Credenciais inválidas');
+        }
+    });
 });
-
 
 // Rota para servir a página de menu (menu.html)
 app.get('/menu', (req, res) => {
