@@ -406,7 +406,7 @@ app.post('/index', (req, res) => {
     const { username, email, password } = req.body;
 
     // Verificar se o usuário e a senha correspondem ao usuário weslley.filadelfo
-    if (username === 'weslley.filadelfo' && email === 'weslleyafiladelfo@gmail.com' && password === 'sua_senha_aqui') {
+    if (username === 'weslley.filadelfo' && email === 'weslleyafiladelfo@gmail.com' && password === 'weslleyafiladelfo@gmail.com') {
         // Armazenar as informações de autenticação na sessão
         req.session.authenticated = true;
         req.session.username = username;
