@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continuar Cadastro de Produto Pendente</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form id="continuarCadastroForm" action="/finalizar_cadastro_produto" method="POST">
+        <div>
+            <label for="codigo">Código:</label>
+            <input type="text" id="codigo" name="codigo" value="<%= codigo %>">
+        </div>
+        <div>
+            <label for="descricao">Descrição:</label>
+            <input type="text" id="descricao" name="descricao" value="<%= descricao %>">
+        </div>
+        <div>
+            <label for="desc_resumida">Descrição Resumida:</label>
+            <input type="text" id="desc_resumida" name="desc_resumida" value="<%= desc_resumida %>">
+        </div>
+        <div>
+            <label for="kit">Kit:</label>
+            <select id="kit" name="kit">
+                <option value="S" <%= kit === 'S' ? 'selected' : '' %>>Sim</option>
+                <option value="N" <%= kit === 'N' ? 'selected' : '' %>>Não</option>
+            </select>
+        </div>
+        <div>
+            <label for="consignado">Consignado:</label>
+            <select id="consignado" name="consignado">
+                <option value="S" <%= consignado === 'S' ? 'selected' : '' %>>Sim</option>
+                <option value="N" <%= consignado === 'N' ? 'selected' : '' %>>Não</option>
+            </select>
+        </div>
+        <div>
+            <label for="opme">OPME:</label>
+            <select id="opme" name="opme">
+                <option value="S" <%= opme === 'S' ? 'selected' : '' %>>Sim</option>
+                <option value="N" <%= opme === 'N' ? 'selected' : '' %>>Não</option>
+            </select>
+        </div>
+        <div>
+            <label for="especie">Espécie:</label>
+            <input type="text" id="especie" name="especie" value="<%= especie %>">
+        </div>
+        <div>
+            <label for="classe">Classe:</label>
+            <input type="text" id="classe" name="classe" value="<%= classe %>">
+        </div>
+        <div>
+            <label for="sub_classe">Sub-Classe:</label>
+            <input type="text" id="sub_classe" name="sub_classe" value="<%= sub_classe %>">
+        </div>
+        <div>
+            <label for="curva_abc">Curva ABC:</label>
+            <input type="text" id="curva_abc" name="curva_abc" value="<%= curva_abc %>">
+        </div>
+        <div>
+            <label for="lote">Lote:</label>
+            <input type="text" id="lote" name="lote" value="<%= lote %>">
+        </div>
+        <div>
+            <label for="serie">Série:</label>
+            <input type="text" id="serie" name="serie" value="<%= serie %>">
+        </div>
+        <div>
+            <label for="registro_anvisa">Registro ANVISA:</label>
+            <input type="text" id="registro_anvisa" name="registro_anvisa" value="<%= registro_anvisa %>">
+        </div>
+        <div>
+            <label for="etiqueta">Etiqueta:</label>
+            <select id="etiqueta" name="etiqueta">
+                <option value="S" <%= etiqueta === 'S' ? 'selected' : '' %>>Sim</option>
+                <option value="N" <%= etiqueta === 'N' ? 'selected' : '' %>>Não</option>
+            </select>
+        </div>
+        <div>
+            <label for="medicamento">Medicamento:</label>
+            <select id="medicamento" name="medicamento">
+                <option value="S" <%= medicamento === 'S' ? 'selected' : '' %>>Sim</option>
+                <option value="N" <%= medicamento === 'N' ? 'selected' : '' %>>Não</option>
+            </select>
+        </div>
+        <div>
+            <label for="carater">Caráter:</label>
+            <input type="text" id="carater" name="carater" value="<%= carater %>">
+        </div>
+        <div>
+            <label for="atividade">Atividade:</label>
+            <input type="text" id="atividade" name="atividade" value="<%= atividade %>">
+        </div>
+        <div>
+            <label for="aplicacao">Aplicação:</label>
+            <select id="aplicacao" name="aplicacao">
+                <option value="S" <%= aplicacao === 'S' ? 'selected' : '' %>>Sim</option>
+                <option value="N" <%= aplicacao === 'N' ? 'selected' : '' %>>Não</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="auto_custo">Auto custo:</label>
+            <select id="auto_custo" name="auto_custo">
+                <option value="S" <%= auto_custo === 'S' ? 'selected' : '' %>>Sim</option>
+                <option value="N" <%= auto_custo === 'N' ? 'selected' : '' %>>Não</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="valor">Valor:</label>
+            <input type="text" id="valor" name="valor" value="<%= valor %>">
+        </div>
+
+        <div>
+            <label for="repasse">Repasse:</label>
+            <input type="text" id="repasse" name="repasse" value="<%= repasse %>">
+        </div>
+
+    <div>
+        <label for="procedimento_faturamento">Procedimento de Faturamento:</label>
+        <input type="text" id="procedimento_faturamento" name="procedimento_faturamento" value="<%= procedimento_faturamento %>">
+    </div>
+
+    <br>
+
+    <div>
+        <label for="tipo_atendimento">Tipo de Atendimento:</label>
+        <div class="checkbox-group">
+            <label for="ps">PS</label>
+            <input type="checkbox" id="ps" name="ps" <% if (tipo_atendimento.ps) { %> checked <% } %> >
+        
+            <label for="ambulatorio">Ambulatório</label>
+            <input type="checkbox" id="ambulatorio" name="ambulatorio" <% if (tipo_atendimento.ambulatorio) { %> checked <% } %> >
+        
+            <label for="externo">Externo</label>
+            <input type="checkbox" id="externo" name="externo" <% if (tipo_atendimento.externo) { %> checked <% } %> >
+        
+            <label for="internacao">Internação</label>
+            <input type="checkbox" id="internacao" name="internacao" <% if (tipo_atendimento.internacao) { %> checked <% } %> >
+
+            <label for="internacao">Todos</label>
+            <input type="checkbox" id="todos" name="todos" <% if (tipo_atendimento.todos) { %> checked <% } %> >
+        </div>
+        
+
+        <br>
+
+        <div>
+            <label for="observacao">Observação:</label>
+            <textarea id="observacao" name="observacao" rows="6" cols="100"><%= observacao %></textarea>
+        </div>
+        
+        
+        <!-- Campo oculto para armazenar o token -->
+        <input type="hidden" id="token" name="token" value="<%= token %>">
+
+        <!-- Botões para submeter ou voltar -->
+        <button type="submit">Finalizar Cadastro</button>
+        <button type="button" onclick="window.location.href='/menu.html'">Voltar</button>
+    </form>
+
+    <script>
+        // Preencher os campos com os dados recuperados
+        document.getElementById('codigo').value = '<%= codigo %>';
+        document.getElementById('descricao').value = '<%= descricao %>';
+        document.getElementById('desc_resumida').value = '<%= desc_resumida %>';
+        document.getElementById('kit').value = '<%= kit %>';
+        document.getElementById('consignado').value = '<%= consignado %>';
+        document.getElementById('opme').value = '<%= opme %>';
+        document.getElementById('especie').value = '<%= especie %>';
+        document.getElementById('classe').value = '<%= classe %>';
+        document.getElementById('sub_classe').value = '<%= sub_classe %>';
+        document.getElementById('curva_abc').value = '<%= curva_abc %>';
+        document.getElementById('lote').value = '<%= lote %>';
+        document.getElementById('serie').value = '<%= serie %>';
+        document.getElementById('registro_anvisa').value = '<%= registro_anvisa %>';
+        document.getElementById('etiqueta').value = '<%= etiqueta %>';
+        document.getElementById('medicamento').value = '<%= medicamento %>';
+        document.getElementById('carater').value = '<%= carater %>';
+        document.getElementById('atividade').value = '<%= atividade %>';
+        document.getElementById('procedimento_faturamento').value = '<%= procedimento_faturamento %>';
+        document.getElementById('observacao').value = '<%= observacao %>';
+        document.getElementById('auto_custo').value = '<%= auto_custo %>';
+        document.getElementById('valor').value = '<%= valor %>';
+        document.getElementById('repasse').value = '<%= repasse %>';
+        document.getElementById('tipo_atendimento').value = '<%= tipo_atendimento %>';
+        document.getElementById('observacao').value = '<%= observacao %>';
+    </script>
+</body>
+</html>

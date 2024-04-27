@@ -1,0 +1,15 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "ep-cold-dew-a4ugyq8r-pooler.us-east-1.aws.neon.tech",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "cadastro_pet",
+            "group": "producao",
+            "database": "cadastro_pet",
+            "username": "weslley",
+            "password": ""
+        }
+    ]
+}

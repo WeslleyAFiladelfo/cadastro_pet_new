@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <!-- Incluir arquivos de estilo CSS -->
+    <link rel="stylesheet" href="/menu.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu">
+            <button class="menu-btn" onclick="window.location.href='/cadastro_produto'">Produto</button>
+            <% if (showAllButtons) { %>
+                <button class="menu-btn" onclick="window.location.href='/procedimento.html'">Procedimentos</button>
+                <button class="menu-btn" onclick="window.location.href='/alterar_usuario'">Alteração de Usuário</button>
+                <button class="menu-btn" onclick="window.location.href='usuario.html'">Cadastro de Usuário</button>
+                <button class="menu-btn" onclick="window.location.href='setor.html'">Cadastro de Setor</button>
+                <button class="menu-btn" onclick="window.location.href='historico_solicitacoes.html'">Histórico de Solicitações</button>
+            <% } %>
+            <button class="menu-btn" onclick="window.location.href='/index'">Sair</button>
+        </div>
+    </div>
+
+    <!-- Scripts opcionais -->
+    <script src="/scripts/menu.js"></script>
+</body>
+
+</html>

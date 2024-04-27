@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Cadastro Pet</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Cadastro Veros</h2>
+        <form id="index-form" action="/index" method="POST">
+            <div class="form-group">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+</body>
+<script>
+    document.getElementById('index-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Impedir o envio padrão do formulário
+
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+
+        // Enviar dados do formulário para o servidor via fetch API
+        fetch('/index', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, email })
+        })
+        .then(response => {
+            if (response.ok) {
+                // Redirecionar o navegador para a rota de menu após login bem-sucedido
+                window.location.href = '/menu';
+            } else {
+                // Tratar erros ou mensagens de resposta inválida
+                console.error('Erro de autenticação:', response.statusText);
+                alert('Credenciais inválidas. Tente novamente.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro durante o login:', error);
+            alert('Erro durante o login. Tente novamente.');
+        });
+    });
+</script>
+</html>
