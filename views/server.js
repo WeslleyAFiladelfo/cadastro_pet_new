@@ -421,22 +421,25 @@ app.post('/index', (req, res) => {
 
         console.log('Usuário encontrado:', row);
 
-        // Verifica se as credenciais correspondem
-        if (username === row.username && email === row.email) {
-            // Armazenar as informações de autenticação na sessão
-            req.session.authenticated = true;
-            req.session.username = username;
-            req.session.email = row.email;
+       // Rota para processar o formulário de login
+app.post('/index', (req, res) => {
+    const { username, email, password } = req.body;
 
-            console.log('Autenticado com sucesso!');
-            // Redirecionar para o menu
-            return res.redirect('/menu');
-        } else {
-            // Credenciais inválidas
-            console.log('Credenciais inválidas');
-            return res.status(401).send('Credenciais inválidas');
-        }
-    });
+    // Verificar se o usuário e a senha correspondem ao usuário weslley.filadelfo
+    if (username === 'weslley.filadelfo' && email === 'weslleyafiladelfo@gmail.com' && password === 'weslleyafiladelfo@gmail.com') {
+        // Armazenar as informações de autenticação na sessão
+        req.session.authenticated = true;
+        req.session.username = username;
+        req.session.email = email;
+
+        console.log('Autenticado com sucesso!');
+        // Redirecionar para o menu
+        return res.redirect('/menu');
+    } else {
+        // Credenciais inválidas
+        console.log('Credenciais inválidas');
+        return res.status(401).send('Credenciais inválidas');
+    }
 });
 
 // Rota para servir a página de menu (menu.html)
