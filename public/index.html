@@ -9,26 +9,33 @@
 <body>
     <div class="container">
         <h2>Cadastro Veros</h2>
-        <!-- Removemos o formulário e adicionamos um botão para login direto -->
-        <button id="login-button">Entrar</button>
+        <form id="index-form" action="/index" method="POST">
+            <div class="form-group">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
     </div>
 </body>
 <script>
-    document.getElementById('login-button').addEventListener('click', function(event) {
-        event.preventDefault(); // Impedir o comportamento padrão do botão
+    document.getElementById('index-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Impedir o envio padrão do formulário
 
-        // Defina o usuário e a senha diretamente aqui
-        const username = 'weslley.filadelfo';
-        const email = 'weslleyafiladelfo@gmail.com';
-        const password = 'weslleyafiladelfo@gmail.com';
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
 
-        // Enviar dados do usuário e senha para o servidor via fetch API
+        // Enviar dados do formulário para o servidor via fetch API
         fetch('/index', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, email, password }) // Adicionamos a senha aqui
+            body: JSON.stringify({ username, email })
         })
         .then(response => {
             if (response.ok) {
